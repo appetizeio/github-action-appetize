@@ -79,6 +79,7 @@ exports.getInputs = getInputs;
  * @throws An error if neither [appFile] nor [appUrl] are specified.
  */
 const uploadBuild = () => __awaiter(void 0, void 0, void 0, function* () {
+    validateInputData(inputs);
     const [data, headers] = dataAndHeaders();
     core.info(`Uploading build to ${url()}`);
     core.info('Attached build info:');
@@ -110,6 +111,40 @@ const dataAndHeaders = () => {
     }
     else {
         throw new Error('Either appFile or appUrl must be specified');
+    }
+};
+/**
+ * Validates that all inputs are valid.
+ * @throws An error if any input is invalid with the reason.
+ */
+const validateInputData = (input) => {
+    //Platform valid types
+    if (input.platform !== 'ios' && input.platform !== 'android') {
+        throw new Error('Platform must be either ios or android');
+    }
+    //AppFile or AppUrl required
+    if (!input.appFile && !input.appUrl) {
+        throw new Error('Either appFile or appUrl must be specified');
+    }
+    //FileType valid types
+    if (input.fileType &&
+        input.fileType !== 'apk' &&
+        input.fileType !== 'zip' &&
+        input.fileType !== 'tar.gz') {
+        throw new Error('FileType must be either apk, zip, or tar.gz');
+    }
+    //Timeout must be a valid number
+    if (input.timeout &&
+        input.timeout !== 30 &&
+        input.timeout !== 60 &&
+        input.timeout !== 120 &&
+        input.timeout !== 180 &&
+        input.timeout !== 300 &&
+        input.timeout !== 600 &&
+        input.timeout !== 1800 &&
+        input.timeout !== 3600 &&
+        input.timeout !== 7200) {
+        throw new Error('Timeout must be either 30, 60, 120, 180, 300, 600, 1800, 3600, or 7200');
     }
 };
 /**

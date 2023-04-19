@@ -31,8 +31,9 @@ inputs:
     description: 'A note for your own purposes that will appear on the management dashboard.'
     required: false
   timeout:
-    description: 'The number of seconds to wait until automatically ending the session due to user inactivity. See the API documentation for accepted values.'
+    description: 'The number of seconds to wait until automatically ending the session due to user inactivity. Must be 30, 60, 120, 180, 300, 600, 1800, 3600, or 7200'
     required: false
+    default: '120'
   disabled:
     description: 'Whether or not streaming is disabled for this app.'
     required: false
