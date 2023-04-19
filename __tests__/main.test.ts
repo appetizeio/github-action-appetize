@@ -1,29 +1,93 @@
-import {wait} from '../src/wait'
-import * as process from 'process'
-import * as cp from 'child_process'
-import * as path from 'path'
-import {expect, test} from '@jest/globals'
 
-test('throws invalid number', async () => {
-  const input = parseInt('foo', 10)
-  await expect(wait(input)).rejects.toThrow('milliseconds not a number')
+import {expect, test, beforeAll, describe} from '@jest/globals'
+import {getInputs} from "../src/appetize";
+
+const inputData = {
+  apiHost: "apiHost",
+  apiToken: "apiToken",
+  publicKey: "publicKey",
+  platform: "android",
+  appFile: "fileLocation",
+  appUrl: "urlLocation",
+  fileType: "apk",
+  note: "note",
+  timeout: "120",
+  disabled: "false",
+  disableHome: "true",
+  useLastFrame: "false",
+  buttonText: "string",
+  postSessionButtonText: "string",
+  launchUrl: "string"
+}
+
+describe('Validate inputs', () => {
+  beforeAll(() => {
+    for (const [key, value] of Object.entries(inputData)) {
+      setInput(key, value)
+    }
+  })
+
+  test("apiHost", () => {
+    expect(getInputs().apiHost).toBe(inputData.apiHost)
+  })
+
+  test("apiKey", () => {
+    expect(getInputs().apiToken).toBe(inputData.apiToken)
+  })
+
+  test("publicKey", () => {
+    expect(getInputs().publicKey).toBe(inputData.publicKey)
+  })
+
+  test("platform", () => {
+    expect(getInputs().platform).toBe(inputData.platform)
+  })
+
+  test("appFile", () => {
+    expect(getInputs().appFile).toBe(inputData.appFile)
+  })
+
+  test("appUrl", () => {
+    expect(getInputs().appUrl).toBe(inputData.appUrl)
+  })
+
+  test("fileType", () => {
+    expect(getInputs().fileType).toBe(inputData.fileType)
+  })
+
+  test("note", () => {
+    expect(getInputs().note).toBe(inputData.note)
+  })
+
+  test("timeout", () => {
+    expect(getInputs().timeout).toBe(Number(inputData.timeout))
+  })
+
+  test("disabled", () => {
+    expect(getInputs().disabled).toBe(Boolean(inputData.disabled))
+  })
+
+  test("disableHome", () => {
+    expect(getInputs().disableHome).toBe(Boolean(inputData.disableHome))
+  })
+
+  test("useLastFrame", () => {
+    expect(getInputs().useLastFrame).toBe(Boolean(inputData.useLastFrame))
+  })
+
+  test("buttonText", () => {
+    expect(getInputs().buttonText).toBe(inputData.buttonText)
+  })
+
+  test("postSessionButtonText", () => {
+    expect(getInputs().postSessionButtonText).toBe(inputData.postSessionButtonText)
+  })
+
+  test("launchUrl", () => {
+    expect(getInputs().launchUrl).toBe(inputData.launchUrl)
+  })
 })
 
-test('wait 500 ms', async () => {
-  const start = new Date()
-  await wait(500)
-  const end = new Date()
-  var delta = Math.abs(end.getTime() - start.getTime())
-  expect(delta).toBeGreaterThan(450)
-})
-
-// shows how the runner will run a javascript action with env / stdout protocol
-test('test runs', () => {
-  process.env['INPUT_MILLISECONDS'] = '500'
-  const np = process.execPath
-  const ip = path.join(__dirname, '..', 'lib', 'main.js')
-  const options: cp.ExecFileSyncOptions = {
-    env: process.env
-  }
-  console.log(cp.execFileSync(np, [ip], options).toString())
-})
+const setInput = (name: string, value: any) => {
+  process.env[`INPUT_${name.replace(/ /g, '_').toUpperCase()}`] = value
+}

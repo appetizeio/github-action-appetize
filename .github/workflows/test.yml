@@ -5,6 +5,7 @@ on: # rebuild any PRs and main branch changes
     branches:
       - main
       - 'releases/*'
+  workflow_dispatch:
 
 jobs:
   build: # make sure build/ci work properly
@@ -15,10 +16,26 @@ jobs:
           npm install
       - run: |
           npm run all
-  test: # make sure the action works on a clean machine without building
+  test: # make sure the action works
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./
+
+      - name: Upload with File
+        uses: ./
         with:
-          milliseconds: 1000
+          apiHost: 'https://test-api.appetize.io'
+          apiToken: ${{ secrets.APPETIZE_API_TOKEN }}
+          publicKey: ${{ secrets.APPETIZE_PUBLIC_KEY }}
+          appFile: test/app.apk
+          platform: 'android'
+          note: 'For Appetize Github Action Testing'
+          fileType: 'apk'
+          timeout: 120
+          disabled: false
+          disableHome: true
+          useLastFrame: true
+          buttonText: "Github Action App Start"
+          postSessionButtonText: "Restart Github Action App"
+          launchUrl: "https://appetize.io"
+          

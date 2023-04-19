@@ -1,105 +1,89 @@
-<p align="center">
-  <a href="https://github.com/actions/typescript-action/actions"><img alt="typescript-action status" src="https://github.com/actions/typescript-action/workflows/build-test/badge.svg"></a>
-</p>
+# Appetize Github Action
 
-# Create a JavaScript Action using TypeScript
+[![Build Test](https://github.com/appetizeio/github-action-appetize/actions/workflows/test.yml/badge.svg)](https://github.com/appetizeio/github-action-appetize/actions/workflows/test.yml)
+[![Check Distribution](https://github.com/appetizeio/github-action-appetize/actions/workflows/check-dist.yml/badge.svg)](https://github.com/appetizeio/github-action-appetize/actions/workflows/check-dist.yml)
 
-Use this template to bootstrap the creation of a TypeScript action.:rocket:
+## 📄 Description
 
-This template includes compilation support, tests, a validation workflow, publishing, and versioning guidance.  
+GitHub Action to facilitate interaction with Appetize's API. This action can be used to upload an Android .apk or iOS .app to Appetize.
 
-If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
+## :arrow_right: Inputs
 
-## Create an action from this template
+| Name                  | Description                                                                                                                                                                                   | Required           | Default                             |
+|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------|-------------------------------------|
+| apiHost               | Alternative Appetize API host                                                                                                                                                                 | :white_check_mark: | https://api.appetize.io             |
+| apiToken              | Appetize API token for your account                                                                                                                                                           | :white_check_mark: |                                     |
+| publicKey             | The publicKey of the app to be updated; If no value is provided a new app will be created                                                                                                     |                    |                                     |
+| platform              | The platform targeted by the build, either `android` or `ios`                                                                                                                                 | :white_check_mark: |                                     |
+| appFile               | The local path to the app file to upload, either this or `appURL` must be provided                                                                                                            |                    |                                     |
+| appUrl                | The URL to the app file to upload, either this or `appFile` must be provided                                                                                                                  |                    |                                     |
+| fileType              | The file type of the app file that will be uploaded; Must be `zip`, `tar.gz` or `apk`                                                                                                         |                    | `zip` for iOS and `apk` for Android |
+| note                  | A note for your own purposes that will appear on the management dashboard.                                                                                                                    |                    |                                     |
+| timeout               | The number of seconds to wait until automatically ending the session due to user inactivity.See the [API documentation](https://docs.appetize.io/rest-api/create-new-app) for accepted values |                    |                                     |
+| disabled              | Whether or not streaming is disabled for this app.                                                                                                                                            |                    |                                     |
+| disableHome           | Whether or not the home button is disabled for this app.                                                                                                                                      |                    |                                     |
+| useLastFrame          | Whether or not the last image on the screen is shown after the session for the app ends.                                                                                                      |                    |                                     |
+| buttonText            | Customize the message prompting the user to start the session                                                                                                                                 |                    | `Tap to Play`                       |
+| postSessionButtonText | Customize the message prompting the user to restart the session                                                                                                                               |                    | `Tap to Play`                       |
+| launchUrl             | Specify a deeplink to bring your users to a specific location when your app is launched.                                                                                                      |                    |                                     |
 
-Click the `Use this Template` and provide the new repo details for your action
+## :arrow_left: Outputs
+| Name      | Description                                |
+|-----------|--------------------------------------------|
+| publicKey | The publicKey of the app that was uploaded |
 
-## Code in Main
+## :tractor: Example Usage
 
-> First, you'll need to have a reasonably modern version of `node` handy. This won't work with versions older than 9, for instance.
-
-Install the dependencies  
-```bash
-$ npm install
-```
-
-Build the typescript and package it for distribution
-```bash
-$ npm run build && npm run package
-```
-
-Run the tests :heavy_check_mark:  
-```bash
-$ npm test
-
- PASS  ./index.test.js
-  ✓ throws invalid number (3ms)
-  ✓ wait 500 ms (504ms)
-  ✓ test runs (95ms)
-
-...
-```
-
-## Change action.yml
-
-The action.yml defines the inputs and output for your action.
-
-Update the action.yml with your name, description, inputs and outputs for your action.
-
-See the [documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions)
-
-## Change the Code
-
-Most toolkit and CI/CD operations involve async operations so the action is run in an async function.
-
-```javascript
-import * as core from '@actions/core';
-...
-
-async function run() {
-  try { 
-      ...
-  } 
-  catch (error) {
-    core.setFailed(error.message);
-  }
-}
-
-run()
-```
-
-See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
-
-## Publish to a distribution branch
-
-Actions are run from GitHub repos so we will checkin the packed dist folder. 
-
-Then run [ncc](https://github.com/zeit/ncc) and push the results:
-```bash
-$ npm run package
-$ git add dist
-$ git commit -a -m "prod dependencies"
-$ git push origin releases/v1
-```
-
-Note: We recommend using the `--license` option for ncc, which will create a license file for all of the production node modules used in your project.
-
-Your action is now published! :rocket: 
-
-See the [versioning documentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
-
-## Validate
-
-You can now validate the action by referencing `./` in a workflow in your repo (see [test.yml](.github/workflows/test.yml))
+### Upload a new iOS app
 
 ```yaml
-uses: ./
-with:
-  milliseconds: 1000
+      - name: Upload to Appetize
+        uses: appetizeio/github-action-appetize@v1
+        with:
+          apiToken: ${{ secrets.APPETIZE_API_TOKEN }}
+          appFile: test/app.zip
+          platform: 'ios'
 ```
 
-See the [actions tab](https://github.com/actions/typescript-action/actions) for runs of this action! :rocket:
+### Upload an existing Android app
 
-## Usage:
+```yaml
+      - name: Upload to Appetize
+        uses: appetizeio/github-action-appetize@v1
+        with:
+          apiToken: ${{ secrets.APPETIZE_API_TOKEN }}
+          publicKey: ${{ secrets.APPETIZE_PUBLIC_KEY }}
+          appFile: test/app.apk
+          platform: 'android'
+```
 
-After testing you can [create a v1 tag](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md) to reference the stable and latest V1 action
+## 🛠 Developer Setup
+
+### Install the dependencies
+
+```bash
+npm install
+```
+
+### Build the typescript and package it for distribution
+
+```bash
+npm run build && npm run package
+```
+
+### Publish to a distribution branch
+
+Actions are run from GitHub repos, so we will check in the packed dist folder. 
+
+Then run `package` (this uses [ncc](https://github.com/vercel/ncc) under the hood):
+```bash
+ npm run package
+ ```
+and push the results:
+```bash
+ git add dist
+ git commit -a -m "prod dependencies"
+ git push origin releases/{version}
+```
+
+The action is now published! 🎉
