@@ -1,23 +1,22 @@
-
 import {expect, test, beforeAll, describe} from '@jest/globals'
-import {getInputs} from "../src/appetize";
+import {getInputs} from '../src/appetize'
 
 const inputData = {
-  apiHost: "apiHost",
-  apiToken: "apiToken",
-  publicKey: "publicKey",
-  platform: "android",
-  appFile: "fileLocation",
-  appUrl: "urlLocation",
-  fileType: "apk",
-  note: "note",
-  timeout: "120",
-  disabled: "false",
-  disableHome: "true",
-  useLastFrame: "false",
-  buttonText: "string",
-  postSessionButtonText: "string",
-  launchUrl: "string"
+  apiHost: 'apiHost',
+  apiToken: 'apiToken',
+  publicKey: 'publicKey',
+  platform: 'android',
+  appFile: 'fileLocation',
+  appUrl: 'urlLocation',
+  fileType: 'apk',
+  note: 'note',
+  timeout: '120',
+  disabled: 'false',
+  disableHome: 'true',
+  useLastFrame: 'false',
+  buttonText: 'string',
+  postSessionButtonText: 'string',
+  launchUrl: 'string'
 }
 
 describe('Validate inputs', () => {
@@ -27,63 +26,65 @@ describe('Validate inputs', () => {
     }
   })
 
-  test("apiHost", () => {
+  test('apiHost', () => {
     expect(getInputs().apiHost).toBe(inputData.apiHost)
   })
 
-  test("apiKey", () => {
+  test('apiKey', () => {
     expect(getInputs().apiToken).toBe(inputData.apiToken)
   })
 
-  test("publicKey", () => {
+  test('publicKey', () => {
     expect(getInputs().publicKey).toBe(inputData.publicKey)
   })
 
-  test("platform", () => {
+  test('platform', () => {
     expect(getInputs().platform).toBe(inputData.platform)
   })
 
-  test("appFile", () => {
+  test('appFile', () => {
     expect(getInputs().appFile).toBe(inputData.appFile)
   })
 
-  test("appUrl", () => {
+  test('appUrl', () => {
     expect(getInputs().appUrl).toBe(inputData.appUrl)
   })
 
-  test("fileType", () => {
+  test('fileType', () => {
     expect(getInputs().fileType).toBe(inputData.fileType)
   })
 
-  test("note", () => {
+  test('note', () => {
     expect(getInputs().note).toBe(inputData.note)
   })
 
-  test("timeout", () => {
+  test('timeout', () => {
     expect(getInputs().timeout).toBe(Number(inputData.timeout))
   })
 
-  test("disabled", () => {
+  test('disabled', () => {
     expect(getInputs().disabled).toBe(Boolean(inputData.disabled))
   })
 
-  test("disableHome", () => {
+  test('disableHome', () => {
     expect(getInputs().disableHome).toBe(Boolean(inputData.disableHome))
   })
 
-  test("useLastFrame", () => {
+  test('useLastFrame', () => {
     expect(getInputs().useLastFrame).toBe(Boolean(inputData.useLastFrame))
   })
 
-  test("buttonText", () => {
+  test('buttonText', () => {
     expect(getInputs().buttonText).toBe(inputData.buttonText)
   })
 
-  test("postSessionButtonText", () => {
-    expect(getInputs().postSessionButtonText).toBe(inputData.postSessionButtonText)
+  test('postSessionButtonText', () => {
+    expect(getInputs().postSessionButtonText).toBe(
+      inputData.postSessionButtonText
+    )
   })
 
-  test("launchUrl", () => {
+  test('launchUrl', () => {
     expect(getInputs().launchUrl).toBe(inputData.launchUrl)
   })
 })
