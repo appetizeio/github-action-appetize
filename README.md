@@ -38,7 +38,7 @@ GitHub Action to facilitate interaction with Appetize's API. This action can be 
 
 ```yaml
       - name: Upload to Appetize
-        uses: appetizeio/github-action-appetize@v1.0.3
+        uses: appetizeio/github-action-appetize@v1.0.4
         with:
           apiToken: ${{ secrets.APPETIZE_API_TOKEN }}
           appFile: test/app.zip
@@ -49,7 +49,7 @@ GitHub Action to facilitate interaction with Appetize's API. This action can be 
 
 ```yaml
       - name: Upload to Appetize
-        uses: appetizeio/github-action-appetize@v1.0.3
+        uses: appetizeio/github-action-appetize@v1.0.4
         with:
           apiToken: ${{ secrets.APPETIZE_API_TOKEN }}
           publicKey: ${{ secrets.APPETIZE_PUBLIC_KEY }}
