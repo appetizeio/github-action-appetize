@@ -39,15 +39,6 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -88,13 +79,13 @@ function getInputs() {
  * @returns The public key of the uploaded build.
  * @throws An error if neither [appFile] nor [appUrl] are specified.
  */
-const uploadBuild = () => __awaiter(void 0, void 0, void 0, function* () {
+const uploadBuild = async () => {
     validateInputData(inputs);
     const [data, headers] = dataAndHeaders();
     core.info(`Uploading build to ${url()}`);
     core.info('Attached build info:');
     core.info(`${JSON.stringify(inputs)}`);
-    const response = yield axios_1.default.post(url(), data, {
+    const response = await axios_1.default.post(url(), data, {
         auth: {
             username: inputs.apiToken,
             password: ''
@@ -104,7 +95,7 @@ const uploadBuild = () => __awaiter(void 0, void 0, void 0, function* () {
         maxBodyLength: Infinity
     });
     return response.data;
-});
+};
 exports.uploadBuild = uploadBuild;
 /**
  * Retrieves the data and headers for the given inputs.
@@ -245,29 +236,18 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(7484));
 const appetize_1 = __nccwpck_require__(9594);
-function run() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const result = yield (0, appetize_1.uploadBuild)();
-            core.setOutput('publicKey', result.publicKey);
-        }
-        catch (error) {
-            if (error instanceof Error)
-                core.setFailed(error.message);
-        }
-    });
+async function run() {
+    try {
+        const result = await (0, appetize_1.uploadBuild)();
+        core.setOutput('publicKey', result.publicKey);
+    }
+    catch (error) {
+        if (error instanceof Error)
+            core.setFailed(error.message);
+    }
 }
 run();
 
