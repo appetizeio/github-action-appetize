@@ -1,0 +1,21 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true, // Allow import React from 'react' instead of import * as React from 'react'
+        "declaration": false,
+        "declarationMap": false,
+        "forceConsistentCasingInFileNames": true,
+        "lib": ["ES2022"],
+        "target": "ES2022",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "noImplicitAny": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": false,
+        "esModuleInterop": true,
+        "pretty": true,
+        "resolveJsonModule": true,
+        "strict": true,
+        "strictNullChecks": true,
+    }
+}

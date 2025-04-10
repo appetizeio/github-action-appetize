@@ -89,6 +89,7 @@ describe('Validate inputs', () => {
   })
 })
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const setInput = (name: string, value: any) => {
   process.env[`INPUT_${name.replace(/ /g, '_').toUpperCase()}`] = value
 }
