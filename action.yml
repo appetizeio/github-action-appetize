@@ -13,25 +13,38 @@ inputs:
     description: 'Appetize API token'
     required: true
   publicKey:
-    description: 'The publicKey of the app to be updated; If no value is provided a new app will be created'
+    description:
+      'The publicKey of the app to be updated; If no value is provided a new app
+      will be created'
     required: false
   platform:
     description: 'The platform targeted by the build, either ios or android'
     required: true
   appFile:
-    description: 'The local path to the app file to upload; either this or appUrl must be provided'
+    description:
+      'The local path to the app file to upload; either this or appUrl must be
+      provided'
     required: false
   appUrl:
-    description: 'The URL to the app file to upload; either this or appFile must be provided'
+    description:
+      'The URL to the app file to upload; either this or appFile must be
+      provided'
     required: false
   fileType:
-    description: 'The file type of the app file that will be uploaded; Must be zip, tar.gz or apk. Default is zip for iOS and apk for Android'
+    description:
+      'The file type of the app file that will be uploaded; Must be zip, tar.gz
+      or apk. Default is zip for iOS and apk for Android'
     required: false
   note:
-    description: 'A note for your own purposes that will appear on the management dashboard.'
+    description:
+      'A note for your own purposes that will appear on the management
+      dashboard.'
     required: false
   timeout:
-    description: 'The number of seconds to wait until automatically ending the session due to user inactivity. Must be 30, 60, 120, 180, 300, 600, 1800, 3600, or 7200'
+    description:
+      'The number of seconds to wait until automatically ending the session due
+      to user inactivity. Must be 30, 60, 120, 180, 300, 600, 1800, 3600, or
+      7200'
     required: false
     default: '120'
   disabled:
@@ -41,20 +54,28 @@ inputs:
     description: 'Whether or not the home button is disabled for this app.'
     required: false
   useLastFrame:
-    description: 'Whether or not the last image on the screen is shown after the session for the app ends.'
+    description:
+      'Whether or not the last image on the screen is shown after the session
+      for the app ends.'
     required: false
   buttonText:
-    description: 'Customize the message prompting the user to start the session, default is "Tap to play"'
+    description:
+      'Customize the message prompting the user to start the session, default is
+      "Tap to play"'
     required: false
   postSessionButtonText:
-    description: 'Customize the message prompting the user to restart the session, default is "Tap to play"'
+    description:
+      'Customize the message prompting the user to restart the session, default
+      is "Tap to play"'
     required: false
   launchUrl:
-    description: 'Specify a deeplink to bring your users to a specific location when your app is launched.'
+    description:
+      'Specify a deeplink to bring your users to a specific location when your
+      app is launched.'
     required: false
 outputs:
   publicKey:
     description: 'The public key of the app that was created or updated'
 runs:
-  using: 'node16'
+  using: 'node24'
   main: 'dist/index.js'

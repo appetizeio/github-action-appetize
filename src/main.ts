@@ -1,7 +1,7 @@
 import * as core from '@actions/core'
-import {uploadBuild} from './appetize'
+import { uploadBuild } from './appetize.js'
 
-async function run(): Promise<void> {
+export async function run(): Promise<void> {
   try {
     const result = await uploadBuild()
     core.setOutput('publicKey', result.publicKey)
@@ -9,5 +9,3 @@ async function run(): Promise<void> {
     if (error instanceof Error) core.setFailed(error.message)
   }
 }
-
-run()

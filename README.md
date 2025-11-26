@@ -5,12 +5,13 @@
 
 ## 📄 Description
 
-GitHub Action to facilitate interaction with Appetize's API. This action can be used to upload an Android .apk or iOS .app to Appetize.
+GitHub Action to facilitate interaction with Appetize's API. This action can be
+used to upload an Android .apk or iOS .app to Appetize.
 
 ## :arrow_right: Inputs
 
 | Name                  | Description                                                                                                                                                            | Required           | Default                             |
-|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------|-------------------------------------|
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | ----------------------------------- |
 | apiHost               | Alternative Appetize API host                                                                                                                                          | :white_check_mark: | https://api.appetize.io             |
 | apiToken              | Appetize API token for your account                                                                                                                                    | :white_check_mark: |                                     |
 | publicKey             | The publicKey of the app to be updated; If no value is provided a new app will be created                                                                              |                    |                                     |
@@ -28,8 +29,9 @@ GitHub Action to facilitate interaction with Appetize's API. This action can be 
 | launchUrl             | Specify a deeplink to bring your users to a specific location when your app is launched.                                                                               |                    |                                     |
 
 ## :arrow_left: Outputs
+
 | Name      | Description                                |
-|-----------|--------------------------------------------|
+| --------- | ------------------------------------------ |
 | publicKey | The publicKey of the app that was uploaded |
 
 ## :tractor: Example Usage
@@ -37,24 +39,24 @@ GitHub Action to facilitate interaction with Appetize's API. This action can be 
 ### Upload a new iOS app
 
 ```yaml
-      - name: Upload to Appetize
-        uses: appetizeio/github-action-appetize@v1.0.6
-        with:
-          apiToken: ${{ secrets.APPETIZE_API_TOKEN }}
-          appFile: test/app.zip
-          platform: 'ios'
+- name: Upload to Appetize
+  uses: appetizeio/github-action-appetize@v1.0.6
+  with:
+    apiToken: ${{ secrets.APPETIZE_API_TOKEN }}
+    appFile: test/app.zip
+    platform: 'ios'
 ```
 
 ### Upload an existing Android app
 
 ```yaml
-      - name: Upload to Appetize
-        uses: appetizeio/github-action-appetize@v1.0.6
-        with:
-          apiToken: ${{ secrets.APPETIZE_API_TOKEN }}
-          publicKey: ${{ secrets.APPETIZE_PUBLIC_KEY }}
-          appFile: test/app.apk
-          platform: 'android'
+- name: Upload to Appetize
+  uses: appetizeio/github-action-appetize@v1.0.6
+  with:
+    apiToken: ${{ secrets.APPETIZE_API_TOKEN }}
+    publicKey: ${{ secrets.APPETIZE_PUBLIC_KEY }}
+    appFile: test/app.apk
+    platform: 'android'
 ```
 
 ## 🛠 Developer Setup
@@ -73,13 +75,17 @@ npm run build && npm run package
 
 ### Publish to a distribution branch
 
-Actions are run from GitHub repos, so we will check in the packed dist folder. 
+Actions are run from GitHub repos, so we will check in the packed dist folder.
 
-Then run `package` (this uses [ncc](https://github.com/vercel/ncc) under the hood):
+Then run `package` (this uses [ncc](https://github.com/vercel/ncc) under the
+hood):
+
 ```bash
  npm run package
- ```
+```
+
 and push the results:
+
 ```bash
  git add dist
  git commit -a -m "prod dependencies"

@@ -1,5 +1,5 @@
-import {expect, test, beforeAll, describe} from '@jest/globals'
-import {getInputs} from '../src/appetize'
+import { expect, test, beforeAll, describe } from '@jest/globals'
+import { getInputs } from '../src/appetize'
 
 const inputData = {
   apiHost: 'apiHost',

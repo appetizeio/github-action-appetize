@@ -1,8 +1,8 @@
 import * as core from '@actions/core'
 import FormData from 'form-data'
-import {createReadStream} from 'fs'
+import { createReadStream } from 'fs'
 import axios from 'axios'
-import {OptionalFormData} from './optionalformdata'
+import { OptionalFormData } from './optionalformdata.js'
 
 const apiVersion = 'v1'
 

@@ -38,4 +38,3 @@ jobs:
           buttonText: 'Github Action App Start'
           postSessionButtonText: 'Restart Github Action App'
           launchUrl: 'https://appetize.io'
-
