@@ -42,7 +42,7 @@ This action runs on the `node24` runtime. GitHub-hosted runners support it out o
 
 ```yaml
       - name: Upload to Appetize
-        uses: appetizeio/github-action-appetize@v1.0.5
+        uses: appetizeio/github-action-appetize@v1.1.0
         with:
           apiToken: ${{ secrets.APPETIZE_API_TOKEN }}
           appFile: test/app.zip
@@ -53,7 +53,7 @@ This action runs on the `node24` runtime. GitHub-hosted runners support it out o
 
 ```yaml
       - name: Upload to Appetize
-        uses: appetizeio/github-action-appetize@v1.0.5
+        uses: appetizeio/github-action-appetize@v1.1.0
         with:
           apiToken: ${{ secrets.APPETIZE_API_TOKEN }}
           publicKey: ${{ secrets.APPETIZE_PUBLIC_KEY }}
@@ -65,7 +65,7 @@ This action runs on the `node24` runtime. GitHub-hosted runners support it out o
 
 ### Install the dependencies
 
-Requires Node.js 24 or later.
+Requires Node.js 18.18 or later. CI builds `dist/` on Node 24 — use 24 if you plan to commit a rebuilt bundle, so `check-dist` stays reproducible.
 
 ```bash
 npm install
