@@ -7,6 +7,10 @@
 
 GitHub Action to facilitate interaction with Appetize's API. This action can be used to upload an Android .apk or iOS .app to Appetize.
 
+## :warning: Requirements
+
+This action runs on the `node24` runtime. GitHub-hosted runners support it out of the box; self-hosted runners must be on runner version `v2.327.1` or later.
+
 ## :arrow_right: Inputs
 
 | Name                  | Description                                                                                                                                                            | Required           | Default                             |
@@ -60,6 +64,8 @@ GitHub Action to facilitate interaction with Appetize's API. This action can be 
 ## 🛠 Developer Setup
 
 ### Install the dependencies
+
+Requires Node.js 24 or later.
 
 ```bash
 npm install
