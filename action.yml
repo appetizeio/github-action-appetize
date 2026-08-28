@@ -56,5 +56,5 @@ outputs:
   publicKey:
     description: 'The public key of the app that was created or updated'
 runs:
-  using: 'node16'
+  using: 'node24'
   main: 'dist/index.js'
